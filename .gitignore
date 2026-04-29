@@ -1,0 +1,13 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Build artifacts that shouldn't sit in the repo - releases live as
+# GitHub Releases (uploaded via the web UI or `gh release create`).
+*.apk
+*.aab
+SHA256SUMS

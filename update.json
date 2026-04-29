@@ -1,0 +1,7 @@
+{
+  "versionCode": 1,
+  "versionName": "0.1.0-mk0",
+  "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/download/v0.1.0-mk0/yancotv-0.1.0-mk0-1.apk",
+  "releaseNotes": "Initial public release. Sideload-only build for Fire TV / Android TV / Android 7+.",
+  "minOsApi": 24
+}
