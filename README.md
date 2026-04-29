@@ -30,7 +30,7 @@ channel lives here.
 Every YancoTV APK is signed with the same key. To verify a download:
 
 ```
-apksigner verify --print-certs yancotv-<version>.apk
+apksigner verify --print-certs yancotv.apk
 ```
 
 The expected signing certificate SHA-256 fingerprint is:
