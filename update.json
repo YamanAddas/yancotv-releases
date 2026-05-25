@@ -1,7 +1,7 @@
 {
-    "versionCode": 6,
-    "versionName": "1.1.1",
+    "versionCode": 7,
+    "versionName": "1.1.2",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "DVR recording reliability fixes, smoother resume across Live, Movies and Series, refreshed remote-focus button styling, backup & restore improvements, plus stability and crash fixes.",
+    "releaseNotes": "Live TV channel logos now display, and the About screen shows the correct version. Includes the 1.1.x improvements: DVR recording reliability, smoother resume across Live, Movies and Series, backup & restore, and remote-focus button polish.",
     "minOsApi": 24
 }
