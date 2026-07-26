@@ -1,7 +1,7 @@
 {
-  "versionCode": 16,
-  "versionName": "1.3.7",
+  "versionCode": 17,
+  "versionName": "1.4.0",
   "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-  "releaseNotes": "YancoTV 1.3.7: Check for updates now gives clear feedback for checking, update found, already latest, and failed states.",
+  "releaseNotes": "Stability release. Fixes the crash while loading large playlists, restores startup on older Fire TV sticks, and stops favorites and resume points being lost after a failed sync. Also fixes the on-screen keyboard opening by itself in Search, and text being cut off in Settings.",
   "minOsApi": 24
 }
