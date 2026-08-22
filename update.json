@@ -1,7 +1,7 @@
 {
-  "versionCode": 17,
-  "versionName": "1.4.0",
+  "versionCode": 21,
+  "versionName": "1.5.3",
   "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-  "releaseNotes": "Stability release. Fixes the crash while loading large playlists, restores startup on older Fire TV sticks, and stops favorites and resume points being lost after a failed sync. Also fixes the on-screen keyboard opening by itself in Search, and text being cut off in Settings.",
+  "releaseNotes": "Home now shows your library properly: Recently added means recently added, category rails follow what you actually watch, and live channels you watch reach Home. Redesigned player controls. Fixes a serious problem where a failed sync could leave your catalogue empty, and stops long syncs freezing the rest of the app. Also: startup logo no longer clipped, episodes no longer badged MOVIE, and the player controls no longer hide while you are navigating them.",
   "minOsApi": 24
 }
