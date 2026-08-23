@@ -1,7 +1,7 @@
 {
-    "versionCode": 25,
-    "versionName": "1.6.1",
+    "versionCode": 26,
+    "versionName": "1.6.2",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.1 \u2014 patch on 1.6.0. Recording now works reliably, silent settings-loss is fixed, and the app no longer rebuilds its whole catalogue on every launch. New: phone swipe controls, guide row-height options, in-app licences & privacy. This patch also keeps scheduled recordings armed across app updates. Known issue: on a TV remote you can't yet skip across a long programme block in the guide \u2014 touch works. Best tried on a phone.",
-    "sha256": "5385a249f97a3a9b557c0ba3bf90229886923678ca7d86580b90d470ad7beda1"
+    "releaseNotes": "YancoTV 1.6.2 \u2014 large categories now load in full. A big category used to stop after its first 1000 items (the rest were only findable via search); it now loads everything as you scroll. See About for open-source licences.",
+    "sha256": "a01e07c03f15cb333198e8ce28fb570522e2ba3aae89919f07b22fcbd1ca9ee5"
 }
