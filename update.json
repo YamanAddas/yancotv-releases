@@ -1,7 +1,7 @@
 {
-    "versionCode": 24,
-    "versionName": "1.6.0",
+    "versionCode": 25,
+    "versionName": "1.6.1",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.0 \u2014 recording now works reliably (scheduled recordings save real files), a rare bug that silently dropped favourites/history/resume points is fixed, and the app no longer rebuilds its whole catalogue on every launch. Adds phone swipe controls (brightness/volume/seek), guide row-height options, and in-app licences & privacy policy. Known issue: on a TV remote you can't yet skip across a long programme block in the guide \u2014 touch works. Best tried on a phone.",
-    "sha256": "49e8280683fad8fcb8604f4ae783ea26ffb3fb42c3a1672b829c1c0dc7ad50d9"
+    "releaseNotes": "YancoTV 1.6.1 \u2014 patch on 1.6.0. Recording now works reliably, silent settings-loss is fixed, and the app no longer rebuilds its whole catalogue on every launch. New: phone swipe controls, guide row-height options, in-app licences & privacy. This patch also keeps scheduled recordings armed across app updates. Known issue: on a TV remote you can't yet skip across a long programme block in the guide \u2014 touch works. Best tried on a phone.",
+    "sha256": "5385a249f97a3a9b557c0ba3bf90229886923678ca7d86580b90d470ad7beda1"
 }
