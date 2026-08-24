@@ -1,7 +1,7 @@
 {
-    "versionCode": 26,
-    "versionName": "1.6.2",
+    "versionCode": 27,
+    "versionName": "1.6.3",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.2 \u2014 large categories now load in full. A big category used to stop after its first 1000 items (the rest were only findable via search); it now loads everything as you scroll. See About for open-source licences.",
-    "sha256": "a01e07c03f15cb333198e8ce28fb570522e2ba3aae89919f07b22fcbd1ca9ee5"
+    "releaseNotes": "YancoTV 1.6.3 \u2014 categories a provider split by a country prefix (e.g. James Bond) now show together; recording and catch-up now use the exact channel you picked; channel-surf covers your whole category; fixed blank pipe channel names. Category names now drop their country prefix and same-named categories merge.",
+    "sha256": "a5b97db98d9e9b3c935b5436e32a8168df15eeea8bf6323cbaabb16c49951b05"
 }
