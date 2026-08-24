@@ -1,7 +1,7 @@
 {
-    "versionCode": 27,
-    "versionName": "1.6.3",
+    "versionCode": 28,
+    "versionName": "1.6.4",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.3 \u2014 categories a provider split by a country prefix (e.g. James Bond) now show together; recording and catch-up now use the exact channel you picked; channel-surf covers your whole category; fixed blank pipe channel names. Category names now drop their country prefix and same-named categories merge.",
-    "sha256": "a5b97db98d9e9b3c935b5436e32a8168df15eeea8bf6323cbaabb16c49951b05"
+    "releaseNotes": "YancoTV 1.6.4 \u2014 the Guide now shows ALL your channels, not just the ones with EPG data (channels with no programme info appear with a 'No information' row and still play). Plus internal robustness fixes.",
+    "sha256": "b7b894a3e65a64e3dfd5f03f6869641b4c7dcffd14d32b7688482b3211c9cb1a"
 }
