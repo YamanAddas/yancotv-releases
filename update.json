@@ -1,7 +1,7 @@
 {
-    "versionCode": 29,
-    "versionName": "1.6.5",
+    "versionCode": 30,
+    "versionName": "1.6.6",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.5 \u2014 in the Guide, the TV remote now moves right/left across a whole channel's programmes instead of jumping down to the next channel.",
-    "sha256": "33718f1090cf28145bdd77bb94900ed967dcc4ee13090c7066ea9d08acc83a8d"
+    "releaseNotes": "YancoTV 1.6.6 — catch-up no longer appears on channels that don't keep an archive (it was being offered on some live channels, e.g. certain 4K feeds, and then failed to play).",
+    "sha256": "0d362d03efee17401bf28fc7a84fcaced408edafdc73e74a2f7e697e97a598f5"
 }
