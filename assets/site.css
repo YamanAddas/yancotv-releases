@@ -1,0 +1,867 @@
+/* ==========================================================================
+   YancoTV — release site
+   Palette is lifted from the app's own theme so the page and the product
+   read as one thing. Layout uses logical properties throughout: Arabic
+   flips the whole page with dir="rtl" and nothing has to be re-specified.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  --bg:        rgb(3, 6, 14);
+  --surface:   rgb(6, 12, 22);
+  --surface-2: rgb(12, 20, 32);
+
+  --text:      rgb(232, 241, 241);
+  --muted:     rgb(154, 174, 184);
+  --faint:     rgb(112, 132, 142);
+
+  --accent:    #00ffaa;
+  --accent-2:  #00cc88;
+  --accent-3:  #33ffbb;
+  --glow:      rgba(0, 255, 170, .28);
+
+  --line:      rgba(255, 255, 255, .075);
+  --line-2:    rgba(0, 255, 170, .22);
+
+  --glass:     linear-gradient(180deg, rgba(16, 28, 44, .62), rgba(8, 16, 28, .5));
+  --blur:      blur(18px) saturate(150%);
+
+  --r:   20px;
+  --r-s: 12px;
+
+  --wrap: 1180px;
+  --pad:  clamp(20px, 4vw, 40px);
+
+  --ease:   cubic-bezier(.22, 1, .36, 1);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Arabic gets a face that can actually carry a heading. Loaded only when
+   the Arabic switch is thrown (see i18n.js) so nobody else pays for it. */
+:root:lang(ar), [dir="rtl"] {
+  --font: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI",
+          Tahoma, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-3); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.skip {
+  position: absolute; inset-inline-start: -9999px; top: 8px;
+  background: var(--accent); color: #04140d; padding: 10px 16px;
+  border-radius: 8px; font-weight: 700; z-index: 100;
+}
+.skip:focus { inset-inline-start: 12px; }
+
+/* ── background ─────────────────────────────────────────────────────── */
+
+.bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+
+.bg-aurora {
+  position: absolute;
+  width: 62vw; height: 62vw;
+  min-width: 460px; min-height: 460px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .5;
+  will-change: transform;
+}
+.bg-aurora-1 {
+  background: radial-gradient(circle, rgba(0, 255, 170, .3), transparent 66%);
+  inset-block-start: -22vw; inset-inline-start: -14vw;
+  animation: drift-a 34s var(--ease) infinite alternate;
+}
+.bg-aurora-2 {
+  background: radial-gradient(circle, rgba(0, 174, 255, .22), transparent 66%);
+  inset-block-start: 34vh; inset-inline-end: -20vw;
+  animation: drift-b 44s var(--ease) infinite alternate;
+}
+.bg-aurora-3 {
+  background: radial-gradient(circle, rgba(0, 255, 170, .16), transparent 66%);
+  inset-block-end: -26vw; inset-inline-start: 22vw;
+  animation: drift-c 52s var(--ease) infinite alternate;
+}
+@keyframes drift-a { to { transform: translate3d(9vw, 7vh, 0) scale(1.16); } }
+@keyframes drift-b { to { transform: translate3d(-11vw, -9vh, 0) scale(1.1); } }
+@keyframes drift-c { to { transform: translate3d(6vw, -6vh, 0) scale(1.2); } }
+
+.bg-stars {
+  position: absolute; inset: 0; opacity: .5;
+  background-image:
+    radial-gradient(1px 1px at 17% 23%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(1px 1px at 53% 71%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 87% 11%, rgba(0,255,170,.7), transparent 60%),
+    radial-gradient(1px 1px at 31% 88%, rgba(255,255,255,.45), transparent 60%),
+    radial-gradient(1px 1px at 67% 41%, rgba(255,255,255,.55), transparent 60%),
+    radial-gradient(1px 1px at 9%  65%, rgba(0,204,255,.55), transparent 60%),
+    radial-gradient(1px 1px at 91% 79%, rgba(255,255,255,.6), transparent 60%),
+    radial-gradient(1px 1px at 41% 14%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 74% 57%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(1px 1px at 24% 47%, rgba(0,255,170,.4), transparent 60%);
+}
+
+/* Fine grain. Kills the banding that big blurred gradients cause on
+   8-bit TV panels, and stops the page looking like a CSS gradient demo. */
+.bg-grain {
+  position: absolute; inset: -50%;
+  opacity: .022;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── layout ─────────────────────────────────────────────────────────── */
+
+.wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
+.wrap-narrow { max-width: 820px; }
+
+.section { padding-block: clamp(64px, 9vw, 120px); }
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: 12.5px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent);
+}
+[lang="ar"] .eyebrow, [dir="rtl"] .eyebrow { letter-spacing: 0; }
+
+h1, h2, h3, h4 { margin: 0; line-height: 1.14; letter-spacing: -.02em; font-weight: 700; }
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { letter-spacing: 0; line-height: 1.32; }
+
+h1 { font-size: clamp(34px, 5.4vw, 62px); }
+.section-h { font-size: clamp(27px, 3.6vw, 42px); margin-bottom: clamp(32px, 5vw, 56px); }
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+/* ── glass ──────────────────────────────────────────────────────────── */
+
+.glass {
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .06),
+    0 26px 70px -34px rgba(0, 0, 0, .95);
+  overflow: hidden;
+}
+/* Specular edge — the thing that separates glass from a grey box. */
+.glass::before {
+  content: "";
+  position: absolute; inset-block-start: 0; inset-inline: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  pointer-events: none;
+}
+
+/* ── buttons ────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 22px;
+  border: 0; border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04140d;
+  font: inherit; font-weight: 700; font-size: 15.5px;
+  text-decoration: none; cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0,255,170,.35) inset, 0 10px 30px -12px var(--glow);
+  transition: transform .22s var(--spring), box-shadow .22s var(--ease), filter .22s var(--ease);
+}
+.btn:hover, .btn:focus-visible {
+  color: #04140d;
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 0 0 1px rgba(0,255,170,.55) inset, 0 16px 40px -14px var(--glow);
+}
+.btn:active { transform: translateY(0); }
+
+.btn-lg { padding: 16px 30px; font-size: 17px; }
+.btn-sm { padding: 9px 18px; font-size: 14.5px; }
+
+.btn-ghost {
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  box-shadow: 0 0 0 1px var(--line) inset;
+  backdrop-filter: blur(10px);
+}
+.btn-ghost:hover, .btn-ghost:focus-visible {
+  color: var(--text);
+  background: rgba(255,255,255,.07);
+  box-shadow: 0 0 0 1px var(--line-2) inset;
+  filter: none;
+}
+
+.btn-ver {
+  padding: 2px 9px; border-radius: 999px;
+  background: rgba(0, 30, 20, .28);
+  font-size: 12.5px; font-weight: 700; letter-spacing: .02em;
+}
+
+/* ── nav ────────────────────────────────────────────────────────────── */
+
+.nav {
+  position: sticky; inset-block-start: 0; z-index: 50;
+  transition: background .3s var(--ease), border-color .3s var(--ease), backdrop-filter .3s var(--ease);
+  border-block-end: 1px solid transparent;
+}
+.nav.is-stuck {
+  background: rgba(4, 9, 17, .72);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-block-end-color: var(--line);
+}
+.nav-inner {
+  max-width: var(--wrap); margin-inline: auto;
+  padding: 14px var(--pad);
+  display: flex; align-items: center; gap: 22px;
+}
+.nav-brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--text); text-decoration: none; font-weight: 700;
+  letter-spacing: -.01em; font-size: 17px;
+}
+.nav-mark { width: 32px; height: 32px; filter: drop-shadow(0 0 10px var(--glow)); }
+.nav-links { display: flex; gap: 4px; margin-inline-start: auto; }
+.nav-links a {
+  padding: 8px 13px; border-radius: 999px;
+  color: var(--muted); text-decoration: none; font-size: 14.5px; font-weight: 500;
+  transition: color .2s, background .2s;
+}
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+
+/* language dropdown */
+.lang { position: relative; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 13px; border-radius: 999px;
+  background: rgba(255,255,255,.04); color: var(--text);
+  border: 1px solid var(--line);
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.lang-btn:hover { background: rgba(255,255,255,.08); border-color: var(--line-2); }
+.lang-caret { transition: transform .25s var(--ease); opacity: .7; }
+.lang-btn[aria-expanded="true"] .lang-caret { transform: rotate(180deg); }
+
+.lang-menu {
+  position: absolute; inset-block-start: calc(100% + 8px); inset-inline-end: 0;
+  min-width: 172px; margin: 0; padding: 6px; list-style: none;
+  background: rgba(10, 18, 30, .92);
+  border: 1px solid var(--line); border-radius: 14px;
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  box-shadow: 0 24px 60px -24px rgba(0,0,0,.95);
+  opacity: 0; visibility: hidden;
+  transform: translateY(-8px) scale(.97);
+  transform-origin: top var(--menu-origin, right);
+  /* visibility flips with a DELAY, never a duration: on open it must become
+     visible on the same frame or focus() lands on a hidden subtree and the
+     keyboard path silently dies; on close it waits for the fade to finish. */
+  transition: opacity .2s var(--ease), transform .24s var(--spring), visibility 0s linear .2s;
+  z-index: 60;
+}
+/* the menu hangs off the inline-end edge, which is the left one in RTL —
+   so the pop-open must grow from that corner, not the right one */
+[dir="rtl"] .lang-menu { --menu-origin: left; }
+.lang.is-open .lang-menu {
+  opacity: 1; visibility: visible; transform: translateY(0) scale(1);
+  transition: opacity .2s var(--ease), transform .24s var(--spring), visibility 0s linear 0s;
+}
+.lang-menu button {
+  display: block; width: 100%;
+  padding: 10px 13px; border: 0; border-radius: 9px;
+  background: none; color: var(--muted);
+  font: inherit; font-size: 15px; text-align: start; cursor: pointer;
+  transition: background .16s, color .16s;
+}
+.lang-menu button:hover { background: rgba(255,255,255,.07); color: var(--text); }
+.lang-menu button[aria-selected="true"] { color: var(--accent); font-weight: 700; }
+
+/* ── hero ───────────────────────────────────────────────────────────── */
+
+.hero { padding-block: clamp(48px, 8vw, 96px) clamp(48px, 7vw, 90px); }
+.hero-grid {
+  display: grid; gap: clamp(36px, 5vw, 60px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+@media (min-width: 980px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); }
+}
+
+.hero h1 { margin-bottom: 20px; text-wrap: balance; }
+.lede { font-size: clamp(17px, 1.5vw, 19.5px); color: var(--muted); max-width: 56ch; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 30px 18px; }
+.hero-meta { font-size: 14.5px; color: var(--faint); margin: 0; }
+
+/* app-shell recreation ------------------------------------------------ */
+
+.device { position: relative; padding: 10px; }
+.device-glow {
+  position: absolute; inset: 6% 4%;
+  background: radial-gradient(ellipse at 50% 50%, var(--glow), transparent 70%);
+  filter: blur(46px); opacity: .8; z-index: 0;
+}
+.device-screen {
+  position: relative; z-index: 1;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  border: 1px solid var(--line-2);
+  background: linear-gradient(160deg, rgba(9,18,30,.95), rgba(4,9,16,.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 40px 90px -40px rgba(0,0,0,1);
+  overflow: hidden;
+}
+
+.ui { display: flex; height: 100%; font-size: clamp(7px, .95vw, 11px); }
+
+.ui-rail {
+  flex: 0 0 13%;
+  /* space-between rather than a percentage gap: a column gap resolves
+     against the rail's own height, which overflowed the 16:10 frame once
+     there were seven items in it. This can't overflow. */
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: space-between;
+  padding-block: 5.5%;
+  border-inline-end: 1px solid rgba(255,255,255,.05);
+  background: linear-gradient(180deg, rgba(0,255,170,.05), transparent 45%);
+}
+.ui-mark {
+  width: 40%; aspect-ratio: 1; flex: 0 0 auto; border-radius: 4px;
+  background: url("yancotv-mark.png") center / contain no-repeat;
+  filter: drop-shadow(0 0 6px var(--glow));
+}
+.ui-item {
+  width: 44%; aspect-ratio: 1; flex: 0 0 auto;
+  display: grid; place-items: center;
+  border-radius: 6px;
+  transition: background .3s var(--ease);
+}
+.ui-item.is-on { background: linear-gradient(135deg, rgba(0,255,170,.2), rgba(0,255,170,.05)); }
+.ui-ico {
+  width: 58%; aspect-ratio: 1;
+  background: currentColor; color: rgba(190, 214, 214, .55);
+  -webkit-mask: var(--m) center / contain no-repeat;
+          mask: var(--m) center / contain no-repeat;
+}
+.ui-item.is-on .ui-ico { color: var(--accent); }
+.ico-home   { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2z'/%3E%3C/svg%3E"); }
+.ico-live   { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='13' rx='2'/%3E%3Cpath d='M8 21h8'/%3E%3C/svg%3E"); }
+.ico-guide  { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M3 9h18M9 9v11'/%3E%3C/svg%3E"); }
+.ico-movies { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2'/%3E%3Cpath d='M10 9l5 3-5 3z'/%3E%3C/svg%3E"); }
+.ico-series { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2'/%3E%3Cpath d='M7 3l5 4 5-4'/%3E%3C/svg%3E"); }
+.ico-fav    { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.8 6.6a5 5 0 00-8.8-2 5 5 0 00-8.8 2c0 5 8.8 10.4 8.8 10.4s8.8-5.4 8.8-10.4z'/%3E%3C/svg%3E"); }
+
+.ui-body { flex: 1; padding: 5% 5% 0; min-width: 0; }
+
+.ui-hero {
+  position: relative;
+  aspect-ratio: 21 / 8;
+  border-radius: 8px; overflow: hidden;
+  border: 1px solid rgba(0,255,170,.32);
+  box-shadow: 0 0 26px -6px var(--glow);
+}
+.ui-hero-art {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 78% 20%, rgba(0,255,170,.26), transparent 60%),
+    radial-gradient(90% 120% at 20% 90%, rgba(0,150,255,.24), transparent 60%),
+    linear-gradient(120deg, #08202c, #0a1420 60%, #061019);
+  animation: art-pan 20s var(--ease) infinite alternate;
+}
+@keyframes art-pan { to { transform: scale(1.12) translate3d(-2%, -2%, 0); } }
+.ui-hero::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(3,7,12,.92) 34%, transparent 72%);
+}
+[dir="rtl"] .ui-hero::after { background: linear-gradient(to left, rgba(3,7,12,.92) 34%, transparent 72%); }
+
+.ui-hero-txt {
+  position: absolute; z-index: 2;
+  inset-block-end: 12%; inset-inline-start: 5%;
+  display: flex; flex-direction: column; gap: .45em;
+}
+.ui-kicker { color: var(--accent); font-size: .82em; font-weight: 700; letter-spacing: .12em; }
+.ui-title  { font-size: 2.1em; font-weight: 700; letter-spacing: -.02em; }
+.ui-sub    { color: var(--muted); font-size: .95em; }
+.ui-btn {
+  align-self: start; margin-top: .35em;
+  padding: .45em 1.15em; border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #04140d; font-weight: 700; font-size: .95em;
+  box-shadow: 0 0 16px -4px var(--glow);
+}
+
+.ui-rowlabel { margin-block: 7% 3%; font-weight: 700; font-size: 1.25em; }
+.ui-row { display: flex; gap: 3.2%; }
+.ui-card {
+  flex: 1 1 0; aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.07);
+  background: linear-gradient(150deg, rgba(20,36,52,.9), rgba(9,17,28,.95));
+  animation: card-focus 8s var(--ease) infinite;
+}
+.ui-card:nth-child(1) { animation-delay: 0s; }
+.ui-card:nth-child(2) { animation-delay: 1.6s; }
+.ui-card:nth-child(3) { animation-delay: 3.2s; }
+.ui-card:nth-child(4) { animation-delay: 4.8s; }
+.ui-card:nth-child(5) { animation-delay: 6.4s; }
+@keyframes card-focus {
+  0%, 16%, 100% { border-color: rgba(255,255,255,.07); box-shadow: none; transform: none; }
+  4%, 13% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 10px 26px -10px var(--glow);
+    transform: translateY(-5%) scale(1.045);
+  }
+}
+
+/* ── trust strip ────────────────────────────────────────────────────── */
+
+.strip { padding-block: clamp(30px, 4vw, 44px); border-block: 1px solid var(--line); }
+.strip-grid { display: grid; gap: 26px 34px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.strip-item h3 {
+  font-size: 15px; margin-bottom: 6px;
+  display: flex; align-items: baseline; gap: 9px;
+}
+.strip-item h3::before {
+  content: ""; flex: 0 0 auto;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 10px var(--glow);
+}
+.strip-item p { font-size: 14.5px; color: var(--muted); line-height: 1.55; }
+
+/* ── features ───────────────────────────────────────────────────────── */
+
+.feature {
+  display: grid; gap: clamp(26px, 4vw, 56px);
+  align-items: center;
+  padding-block: clamp(38px, 5vw, 62px);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 900px) {
+  .feature { grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); }
+  .feature-flip .feature-copy { order: 2; }
+  .feature-flip .feature-art  { order: 1; }
+}
+.feature + .feature { border-block-start: 1px solid var(--line); }
+.feature-copy h3 { font-size: clamp(21px, 2.3vw, 28px); margin-bottom: 14px; }
+.feature-copy p { color: var(--muted); max-width: 52ch; }
+.feature-art { min-width: 0; }
+
+/* guide mock */
+.epg { position: relative; padding: 16px; }
+/* The programme cells deliberately run past the right edge — a real guide
+   continues off-screen. This fades them out so it reads as "there's more"
+   rather than as a layout that overflowed. */
+.epg::after {
+  content: ""; position: absolute; z-index: 2;
+  inset-block: 0; inset-inline-end: 0; width: 64px;
+  background: linear-gradient(to left, rgba(8, 16, 28, .95), transparent);
+  pointer-events: none;
+}
+[dir="rtl"] .epg::after { background: linear-gradient(to right, rgba(8, 16, 28, .95), transparent); }
+.epg-head {
+  display: flex; align-items: center; gap: 10px;
+  padding-block-end: 12px; margin-block-end: 12px;
+  border-block-end: 1px solid var(--line);
+  font-size: 12.5px; color: var(--faint);
+}
+.epg-now {
+  padding: 4px 13px; border-radius: 999px;
+  border: 1px solid var(--line-2); color: var(--accent);
+  font-weight: 700;
+  /* pushes the clock labels to the timeline side. Was `.epg-time:first-of-type`,
+     which never matched: .epg-now is itself the first <span> in the header. */
+  margin-inline-end: auto;
+}
+.epg-time { min-width: 56px; text-align: start; }
+.epg-rows { display: grid; gap: 6px; }
+.epg-row { display: flex; gap: 5px; align-items: stretch; height: 34px; }
+.epg-ch {
+  flex: 0 0 33%; display: flex; align-items: center;
+  padding-inline: 10px; border-radius: 7px;
+  background: rgba(255,255,255,.035);
+  font-size: 12.5px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.epg-row i {
+  flex: 0 0 var(--w); border-radius: 7px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid transparent;
+}
+.epg-row i.on {
+  background: linear-gradient(135deg, rgba(0,255,170,.2), rgba(0,255,170,.06));
+  border-color: var(--line-2);
+}
+.epg-line {
+  position: absolute; inset-block: 58px 16px;
+  inset-inline-start: 44%; width: 2px;
+  background: linear-gradient(180deg, transparent, #ff4d5e 12%, #ff4d5e 88%, transparent);
+  box-shadow: 0 0 10px rgba(255,77,94,.7);
+}
+
+/* source chips */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; padding: 22px; }
+.chip {
+  padding: 9px 16px; border-radius: 999px;
+  border: 1px solid var(--line-2); color: var(--accent);
+  background: rgba(0,255,170,.05);
+  font-size: 14px; font-weight: 600;
+}
+.chip-dim { border-color: var(--line); color: var(--muted); background: rgba(255,255,255,.03); font-weight: 500; }
+
+/* player mock */
+.player { padding: 20px; }
+.player-bar { position: relative; height: 5px; border-radius: 999px; background: rgba(255,255,255,.1); }
+.player-played {
+  position: absolute; inset-block: 0; inset-inline-start: 0; width: 46%;
+  border-radius: 999px; background: linear-gradient(90deg, var(--accent-2), var(--accent));
+}
+.player-knob {
+  position: absolute; inset-inline-start: 46%; inset-block-start: 50%;
+  width: 13px; height: 13px; margin-inline-start: -6px; margin-block-start: -6.5px;
+  border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 14px var(--glow);
+}
+.player-row { display: flex; align-items: center; gap: 9px; margin-block-start: 16px; flex-wrap: wrap; }
+.player-t { font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
+.player-end { margin-inline-start: auto; }
+.player-pill {
+  padding: 6px 14px; border-radius: 999px;
+  background: rgba(255,255,255,.05); border: 1px solid var(--line);
+  font-size: 13px; color: var(--muted);
+}
+.player-pill:first-of-type { border-color: var(--line-2); color: var(--accent); }
+
+/* screenshot frames */
+.shot { padding: 0; border-radius: var(--r); }
+.shot img { border-radius: inherit; }
+
+/* ── installer ──────────────────────────────────────────────────────── */
+
+.installer { padding: 0; }
+.tabs {
+  position: relative;
+  display: flex; flex-wrap: wrap; gap: 2px;
+  padding: 8px 8px 0;
+  border-block-end: 1px solid var(--line);
+}
+.tab {
+  position: relative; z-index: 1;
+  padding: 13px 20px; border: 0;
+  background: none; color: var(--muted);
+  font: inherit; font-size: 14.5px; font-weight: 600;
+  cursor: pointer; border-radius: 10px 10px 0 0;
+  transition: color .22s var(--ease), background .22s var(--ease);
+}
+.tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
+.tab.is-on { color: var(--accent); }
+.tab-ink {
+  /* physical `left` on purpose — site.js drives this with offsetLeft,
+     which stays measured from the left edge even when dir="rtl" */
+  position: absolute; inset-block-end: -1px; left: 0;
+  height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  box-shadow: 0 0 12px var(--glow);
+  border-radius: 2px;
+  transition: transform .38s var(--ease), width .38s var(--ease);
+}
+
+.panel { padding: clamp(20px, 3vw, 34px); }
+.panel[hidden] { display: none; }
+.panel.is-entering > * { animation: panel-in .42s var(--ease) both; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(10px); } }
+
+.steps { counter-reset: s; list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; }
+.steps > li { position: relative; padding-inline-start: 52px; counter-increment: s; }
+.steps > li::before {
+  content: counter(s);
+  position: absolute; inset-inline-start: 0; inset-block-start: -2px;
+  width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(0,255,170,.1); border: 1px solid var(--line-2);
+  color: var(--accent); font-weight: 700; font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.steps h4 { font-size: 16.5px; margin-bottom: 5px; }
+.steps p { color: var(--muted); font-size: 15px; }
+.steps .btn { margin-block-start: 12px; }
+
+.url {
+  display: flex; align-items: center; gap: 10px;
+  margin-block: 10px;
+  padding: 11px 13px;
+  background: rgba(2, 6, 12, .7);
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+}
+.url code {
+  flex: 1; min-width: 0;
+  font-family: var(--mono); font-size: 13px; color: var(--accent);
+  overflow-wrap: anywhere;
+  direction: ltr; text-align: start;
+}
+.url code.fp { font-size: 11.5px; color: var(--muted); letter-spacing: .02em; }
+.copy {
+  flex: 0 0 auto;
+  padding: 6px 12px; border-radius: 7px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line);
+  color: var(--muted); font: inherit; font-size: 12.5px; font-weight: 600;
+  cursor: pointer; transition: background .18s, color .18s, border-color .18s;
+}
+.copy:hover { background: rgba(0,255,170,.12); color: var(--accent); border-color: var(--line-2); }
+.copy.is-done { color: var(--accent); border-color: var(--line-2); }
+
+/* ── warn box ───────────────────────────────────────────────────────── */
+
+.warn {
+  margin-block-start: 28px;
+  padding: clamp(20px, 3vw, 30px);
+  border-color: rgba(251, 191, 36, .26);
+  background: linear-gradient(180deg, rgba(48, 38, 12, .4), rgba(12, 14, 20, .5));
+}
+.warn h3 { font-size: 17.5px; margin-bottom: 8px; color: #fcd34d; }
+.warn > p { color: var(--muted); font-size: 15px; }
+
+/* ── folds (details/summary) ────────────────────────────────────────── */
+
+.fold { border-block-start: 1px solid var(--line); }
+.faq .fold:last-child { border-block-end: 1px solid var(--line); }
+.warn .fold { margin-block-start: 16px; border-block-start-color: rgba(251,191,36,.2); }
+
+.fold summary {
+  list-style: none; cursor: pointer;
+  padding: 17px 40px 17px 0;
+  font-weight: 600; font-size: 16.5px;
+  position: relative;
+  transition: color .2s;
+}
+[dir="rtl"] .fold summary { padding: 17px 0 17px 40px; }
+.fold summary::-webkit-details-marker { display: none; }
+.fold summary:hover { color: var(--accent); }
+.fold summary::after {
+  content: ""; position: absolute;
+  inset-inline-end: 8px; inset-block-start: 50%;
+  width: 11px; height: 11px; margin-block-start: -7px;
+  /* physical borders: a chevron points DOWN in both directions. Logical
+     ones made it point left as soon as the page flipped to RTL. */
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  opacity: .55;
+  transition: transform .3s var(--ease), opacity .2s;
+}
+.fold[open] summary::after { transform: rotate(-135deg); margin-block-start: -3px; opacity: 1; }
+.fold-body {
+  padding-block-end: 20px;
+  color: var(--muted); font-size: 15.5px;
+  max-width: 68ch;
+  animation: fold-in .34s var(--ease) both;
+}
+@keyframes fold-in { from { opacity: 0; transform: translateY(-6px); } }
+.warn .fold-body { max-width: none; }
+
+/* ── bring your own ─────────────────────────────────────────────────── */
+
+.byo { padding: clamp(24px, 4vw, 44px); text-align: center; }
+.byo h2 { font-size: clamp(23px, 3vw, 33px); margin-bottom: 14px; }
+.byo > p { color: var(--muted); max-width: 66ch; margin-inline: auto; }
+.byo-shot {
+  margin-block: 28px 14px;
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 70px -40px rgba(0,0,0,1);
+}
+.byo-cap { font-size: 13.5px; color: var(--faint); }
+
+/* ── final ──────────────────────────────────────────────────────────── */
+
+.final { padding: clamp(30px, 5vw, 54px); text-align: center; }
+.final h2 { font-size: clamp(25px, 3.4vw, 38px); margin-bottom: 12px; }
+.final > p { color: var(--muted); margin-bottom: 26px; }
+.final-note {
+  margin-block-start: 22px; padding-block-start: 18px;
+  border-block-start: 1px solid var(--line);
+  font-size: 13.5px; color: var(--faint); line-height: 1.55;
+}
+.final-note span:first-child { color: var(--accent); font-weight: 700; }
+.final-alt { margin-block-start: 20px; font-size: 14.5px; }
+.final-alt a { color: var(--muted); }
+.final-alt a:hover { color: var(--accent); }
+
+/* ── footer ─────────────────────────────────────────────────────────── */
+
+.foot { border-block-start: 1px solid var(--line); padding-block: 46px 34px; margin-block-start: 40px; }
+.foot-grid {
+  display: grid; gap: 30px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+@media (min-width: 760px) { .foot-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+.foot-brand img { width: 190px; opacity: .95; }
+.foot-brand p { margin-block-start: 12px; color: var(--faint); font-size: 14.5px; max-width: 42ch; }
+.foot-links { display: grid; gap: 10px; align-content: start; }
+@media (min-width: 760px) { .foot-links { justify-items: end; } }
+[dir="rtl"] .foot-links { justify-items: start; }
+@media (min-width: 760px) { [dir="rtl"] .foot-links { justify-items: start; } }
+.foot-links a { color: var(--muted); text-decoration: none; font-size: 14.5px; }
+.foot-links a:hover { color: var(--accent); }
+
+.foot-legal {
+  margin-block-start: 34px; padding-block-start: 22px;
+  border-block-start: 1px solid var(--line);
+}
+.foot-legal p { font-size: 13px; color: var(--faint); line-height: 1.6; max-width: 82ch; }
+.foot-copy { margin-block-start: 10px; }
+
+/* ── scroll reveal ──────────────────────────────────────────────────── */
+
+/* Visible by DEFAULT. site.js opts the page into the animation by putting
+   `js-reveal` on <html>, and only once its observer is actually wired up.
+   Written the other way round first — hidden by default, revealed by JS —
+   which meant no JS, or one thrown exception in site.js, left every one of
+   these blocks at opacity 0 and the page blank. */
+.reveal { opacity: 1; transform: none; }
+
+.js-reveal .reveal { opacity: 0; transform: translateY(22px); }
+.js-reveal .reveal.is-in {
+  opacity: 1; transform: none;
+  transition: opacity .7s var(--ease), transform .8s var(--ease);
+}
+
+/* ── language transition ────────────────────────────────────────────── */
+
+body.is-swapping main, body.is-swapping .foot, body.is-swapping .nav-links {
+  opacity: .25;
+  transition: opacity .16s ease-out;
+}
+
+/* ── responsive ─────────────────────────────────────────────────────── */
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-actions { margin-inline-start: auto; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .nav-name { display: none; }
+  .lang-btn span { display: none; }
+  .lang-btn { padding: 9px 10px; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .epg-ch { flex-basis: 44%; }
+  .device { padding: 0; }
+}
+
+/* ── motion off ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .bg-aurora { animation: none; }
+}
+
+/* Some TV browsers and low-power devices choke on stacked backdrop blur.
+   Drop to a solid tint rather than shipping a 12fps page. */
+@media (prefers-reduced-transparency: reduce), (update: slow) {
+  .glass, .lang-menu, .nav.is-stuck {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(8, 15, 26, .96);
+  }
+  .bg-aurora { filter: blur(60px); opacity: .35; }
+  .bg-grain { display: none; }
+}
+
+/* ==========================================================================
+   Legal pages (privacy, terms) — same shell, reading-first column.
+   ========================================================================== */
+
+.legal { padding-block: clamp(40px, 6vw, 80px) clamp(50px, 7vw, 90px); }
+.legal-head { margin-bottom: clamp(26px, 4vw, 40px); }
+.legal-head h1 { font-size: clamp(30px, 4.2vw, 46px); margin-bottom: 12px; }
+.legal-date { color: var(--faint); font-size: 14.5px; margin: 0; }
+
+.legal-body {
+  padding: clamp(24px, 4vw, 44px);
+  font-size: 16.5px;
+}
+.legal-body > *:first-child { margin-block-start: 0; }
+
+.legal-lede {
+  padding: 18px 20px;
+  margin-block-end: 30px;
+  border-radius: var(--r-s);
+  border-inline-start: 3px solid var(--accent);
+  background: rgba(0, 255, 170, .055);
+  color: var(--text);
+}
+
+.legal-body h2 {
+  font-size: 19px;
+  margin-block: 34px 12px;
+  padding-block-end: 9px;
+  border-block-end: 1px solid var(--line);
+}
+.legal-body h3 { font-size: 16.5px; margin-block: 22px 6px; color: var(--text); }
+.legal-body p, .legal-body li { color: var(--muted); }
+.legal-body ul { padding-inline-start: 20px; margin-block: 0 1em; }
+.legal-body li { margin-block: 10px; }
+.legal-body li > strong { color: var(--text); }
+
+/* numbered clauses in the terms */
+.clauses { counter-reset: c; list-style: none; padding: 0; margin: 0; display: grid; gap: 24px; }
+.clauses > li { position: relative; padding-inline-start: 46px; counter-increment: c; }
+.clauses > li::before {
+  content: counter(c);
+  position: absolute; inset-inline-start: 0; inset-block-start: 1px;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(0,255,170,.09); border: 1px solid var(--line-2);
+  color: var(--accent); font-weight: 700; font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.clauses h3 { margin-block: 0 5px; }
+
+.legal-foot {
+  margin-block-start: 34px; padding-block-start: 22px;
+  border-block-start: 1px solid var(--line);
+  font-size: 14.5px; color: var(--faint);
+}
+.legal-nav {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-block-start: 26px;
+}
