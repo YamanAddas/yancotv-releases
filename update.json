@@ -1,7 +1,7 @@
 {
-    "versionCode": 28,
-    "versionName": "1.6.4",
+    "versionCode": 29,
+    "versionName": "1.6.5",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.4 \u2014 the Guide now shows ALL your channels, not just the ones with EPG data (channels with no programme info appear with a 'No information' row and still play). Plus internal robustness fixes.",
-    "sha256": "b7b894a3e65a64e3dfd5f03f6869641b4c7dcffd14d32b7688482b3211c9cb1a"
+    "releaseNotes": "YancoTV 1.6.5 \u2014 in the Guide, the TV remote now moves right/left across a whole channel's programmes instead of jumping down to the next channel.",
+    "sha256": "33718f1090cf28145bdd77bb94900ed967dcc4ee13090c7066ea9d08acc83a8d"
 }
