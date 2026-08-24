@@ -1,7 +1,7 @@
 {
-    "versionCode": 30,
-    "versionName": "1.6.6",
+    "versionCode": 31,
+    "versionName": "1.6.7",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.6.6 — catch-up no longer appears on channels that don't keep an archive (it was being offered on some live channels, e.g. certain 4K feeds, and then failed to play).",
-    "sha256": "0d362d03efee17401bf28fc7a84fcaced408edafdc73e74a2f7e697e97a598f5"
+    "releaseNotes": "YancoTV 1.6.7 \u2014 TV: Settings no longer jumps back to the main menu after pressing buttons like \u201cCheck now\u201d, and screens with text boxes open at the top instead of the last field. Phone: the keyboard no longer covers the box you are typing in. Cast: the device list starts searching before it opens.",
+    "sha256": "805cd02b0211507cf2a4daabbc29607eacc0148ea0dc03fcdd4cf870c59e3e57"
 }
