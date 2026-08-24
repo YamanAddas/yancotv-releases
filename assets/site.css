@@ -865,3 +865,25 @@ body.is-swapping main, body.is-swapping .foot, body.is-swapping .nav-links {
   display: flex; flex-wrap: wrap; gap: 12px;
   margin-block-start: 26px;
 }
+
+/* Downloader short code — only rendered once a code exists (see site.js). */
+/* `display:flex` beats the UA's [hidden]{display:none}, so an empty code
+   block rendered as a blank 53px bar. Restore it explicitly. */
+.dl-code[hidden] { display: none; }
+
+.dl-code {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-block: 12px 14px; padding: 14px 18px;
+  border-radius: var(--r-s);
+  border: 1px solid var(--line-2);
+  background: rgba(0, 255, 170, .06);
+}
+.dl-code-num {
+  font-family: var(--mono);
+  font-size: clamp(26px, 3.6vw, 36px); font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--accent);
+  text-shadow: 0 0 22px var(--glow);
+  direction: ltr;
+}
+.dl-code p { margin: 0; flex: 1 1 200px; font-size: 14.5px; color: var(--muted); }

@@ -141,6 +141,21 @@
     }
   });
 
+
+  /* ── Downloader short code ───────────────────────────────────────── */
+
+  // A numeric code from go.aftvnews.com saves typing a 71-character URL on a
+  // TV remote. Set data-code on the .dl-code element and it renders; leave it
+  // empty and the block stays out of the page entirely rather than showing an
+  // empty slot.
+  Array.prototype.slice.call(document.querySelectorAll(".dl-code")).forEach(function (box) {
+    var code = (box.getAttribute("data-code") || "").trim();
+    if (!/^[0-9]{4,8}$/.test(code)) return;
+    var num = box.querySelector(".dl-code-num");
+    if (num) num.textContent = code;
+    box.hidden = false;
+  });
+
   /* ── live version, straight from the update feed ─────────────────── */
 
   // update.json is the manifest the installed app already polls for updates.
