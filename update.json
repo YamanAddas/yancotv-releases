@@ -1,7 +1,6 @@
 {
-    "versionCode": 32,
-    "versionName": "1.7.0-beta1",
+    "versionCode": 33,
+    "versionName": "1.7.0-beta2",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.7.0-beta1 \u2014 The category wheels are now the default look on TV and phone. Recording: a file opens on a picture instead of black, switching channel mid-recording no longer mixes the two, and Record in the player menu is one toggle that starts and stops. Also fixed: the player menu could reopen with nothing selected, the Guide with no data left nothing to press, and provider addresses no longer appear in logs.",
-    "sha256": "e390940c662240d6f362116b20f93f7979c75a7ee2ba3d28451c742aa5351f31"
+    "sha256": "e083468aa78ce82f268b6208f38c7dfc722b6921e6bebf8947afbcbb382aa30d"
 }
