@@ -1,7 +1,7 @@
 {
-    "versionCode": 36,
-    "versionName": "1.7.0-beta5",
+    "versionCode": 37,
+    "versionName": "1.7.0-beta6",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.7.0-beta5 \u2014 Typing a few letters now finds a title (search was whole-word-only until now). Say a film's name into the remote's search and it plays. Pause/resume by voice on Google TV. Navigation and PIN-lock fixes on TV; crash reports and the privacy policy corrected to say what they actually do.",
-    "sha256": "9f3ca933ba8784a14f2ffafa0ac87441336b84381c6ccfd886ac18c2038d085e"
+    "releaseNotes": "YancoTV 1.7.0-beta6 \u2014 Browsing on a TV is redesigned: more categories on screen, each row a turning wheel with its name on a band, and tiles that stand forward. Channels use your provider's numbers, and typed numbers tune them. Zapping, guide, recording and settings fixes.",
+    "sha256": "e7410deaec7ffcefaf25f60e812aeedb620112df9cc701ebd64b8c0aed96c7a7"
 }
