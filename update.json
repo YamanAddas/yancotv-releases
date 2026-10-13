@@ -1,7 +1,7 @@
 {
-    "versionCode": 37,
-    "versionName": "1.7.0-beta6",
+    "versionCode": 38,
+    "versionName": "1.7.0-beta7",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.7.0-beta6 \u2014 Browsing on a TV is redesigned: more categories on screen, each row a turning wheel with its name on a band, and tiles that stand forward. Channels use your provider's numbers, and typed numbers tune them. Zapping, guide, recording and settings fixes.",
-    "sha256": "e7410deaec7ffcefaf25f60e812aeedb620112df9cc701ebd64b8c0aed96c7a7"
+    "releaseNotes": "YancoTV 1.7.0-beta7 - More than one list? Each now has its own heading in Live TV, Movies, Series, the guide and Home. Remove from Home, your provider login kept out of stored addresses, faster sync and delete, a guide that follows a changed password, and many fixes.",
+    "sha256": "6d798aabcb327888f17e8bfffdc4478e229f742129d3f056c29914702ead2277"
 }
