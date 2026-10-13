@@ -1,7 +1,7 @@
 {
-    "versionCode": 39,
-    "versionName": "1.7.0-beta7.1",
+    "versionCode": 40,
+    "versionName": "1.7.0-beta7.2",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.7.0-beta7.1 - Replaces beta7, which could delete favourites on some M3U titles. More than one list? Each has its own heading in Live TV, Movies, Series, the guide and Home. Remove from Home, your provider login kept out of stored addresses, faster sync and delete, a guide that follows a changed password, and many fixes.",
-    "sha256": "f0d9d64bb028ce03aebd972a476cc9085f3123fdea98b66c676325e43cdcd601"
+    "releaseNotes": "YancoTV 1.7.0-beta7.2 - A list that showed only live TV because the provider answered part of a sync empty now asks again and gets its films and series. Replaces beta7, which could delete favourites on some M3U titles. More than one list? Each has its own heading. Remove from Home, faster sync and delete, a guide that follows a changed password, and many fixes.",
+    "sha256": "ba252d40e4b5cdc0d0ddb7f8ef625123d9bd42b60772a9013fdb145bba770b4f"
 }
