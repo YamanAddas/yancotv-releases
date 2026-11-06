@@ -1,7 +1,7 @@
 {
-    "versionCode": 40,
-    "versionName": "1.7.0-beta7.2",
+    "versionCode": 41,
+    "versionName": "1.7.0-beta8",
     "downloadUrl": "https://github.com/YamanAddas/yancotv-releases/releases/latest/download/yancotv.apk",
-    "releaseNotes": "YancoTV 1.7.0-beta7.2 - A list that showed only live TV because the provider answered part of a sync empty now asks again and gets its films and series. Replaces beta7, which could delete favourites on some M3U titles. More than one list? Each has its own heading. Remove from Home, faster sync and delete, a guide that follows a changed password, and many fixes.",
-    "sha256": "ba252d40e4b5cdc0d0ddb7f8ef625123d9bd42b60772a9013fdb145bba770b4f"
+    "releaseNotes": "YancoTV 1.7.0-beta8 - Lists refresh themselves about every 12 hours (turn on Refresh automatically for the list). Hide all in Categories. Your provider login only goes to that list's own servers. Programmes with no end time stay in the guide. Optional Play on TV at boot on TVs. Many fixes.",
+    "sha256": "7ec84c0ee2f461a2fecd3f90d47584406f99c717642df7f22c0eb1848b9cbe61"
 }
